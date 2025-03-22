@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كارت معايدة</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #f4f4f4; }
+        .card-container { 
+            position: relative; 
+            display: inline-block; 
+            width: 600px; 
+            height: 600px;
+        }
+        .card-img { 
+            width: 100%; 
+            height: 100%; 
+            border-radius: 10px;
+        }
+        .name { 
+            position: absolute; 
+            top: 75%; 
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            font-size: 32px; 
+            font-weight: bold; 
+            color: black; 
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7);
+            white-space: nowrap;
+        }
+        input, button { margin-top: 10px; padding: 10px; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <h2>🎉 عيد سعيد 🎉</h2>
+    <p>اكتب اسمك لتخصيص كارت المعايدة:</p>
+    <input type="text" id="nameInput" placeholder="اكتب اسمك هنا" oninput="updateName()">
+    <button onclick="downloadImage()">تحميل الصورة</button>
+    
+    <div class="card-container" id="card">
+        <img src="https://drive.google.com/uc?export=view&id=1R4fz2K6WJwPid1PbGm_zIzQ9YLwO_s1b" class="card-img" id="cardImage">
+        <div class="name" id="nameText">الاسم يظهر هنا</div>
+    </div>
+    
+    <script>
+        function updateName() {
+            let name = document.getElementById("nameInput").value;
+            document.getElementById("nameText").textContent = name || "الاسم يظهر هنا";
+        }
+
+        function downloadImage() {
+            html2canvas(document.getElementById("card")).then(canvas => {
+                let link = document.createElement("a");
+                link.download = "greeting-card.png";
+                link.href = canvas.toDataURL("image/png");
+                link.click();
+            });
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</body>
+</html>
